@@ -12,15 +12,18 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url('/') }}">My Blog</a>
+        <a class="navbar-brand">My Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/posts') }}">POST'S</a>
-            </li>    
+              <a class="nav-link" style="margin-top:8px;" href="{{ url('/posts') }}">POST'S</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link"  style="margin-top:8px;" href="{{ url('/') }}">Adicionar</a>
+            </li>  
           </ul>
         </div>
       </nav>
@@ -30,13 +33,27 @@
                   @foreach ($a as $item)
                     <div class="col mb-4">
                       <div class="card">
-                        <img src="" class="card-img-top" alt="...">
+
                         <div class="card-body">
-                        <h5 class="card-title">{{$item['Titulo_Post']}}</h5>
+                        <h5 class="card-title"><{{$item['Titulo_Post']}}</h5>
                         <p class="card-text">{{ mb_strimwidth($item['post'], 0, 200 ,"...")}}</p>
                         </div>
                       </div>
+                      <form style=" float: left;
+                      margin-right: 25px;"action={{ url('/materia') }} method="POST">
+                        {{ csrf_field() }}
+                            <td><input type="hidden" name="id" value={{$item['id_post']}}>
+                            <input type="submit"  class="btn btn-primary" value="Atualizar">
+                            </td>
+                      </form> 
+                      <form action={{ url('/delete') }} method="POST">
+                        {{ csrf_field() }}
+                            <td><input type="hidden" name="id" value={{$item['id_post']}}>
+                            <input type="submit"  class="btn btn-danger" value="Excluir">
+                            </td>
+                      </form> 
                     </div>
+                    
                      @endforeach
                 </div>
                 </div>

@@ -15,4 +15,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::POST('/enviar', 'HomeController@enviar')->name('enviar');
 Route::get('/posts','HomeController@getPosts');
-
+route::POST('/materia','HomeController@materia');
+route::post('/materia/update','HomeController@materiaUpdate');
+route::post('/delete','HomeController@delet');
